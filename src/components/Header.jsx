@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { motion, useScroll } from 'framer-motion';
 import { navLinks } from '@/constants/navLinks';
 
 const Header = () => {
+  const { pathname } = useRouter();
+  const { scrollY } = useScroll();
   const [hoveredLink, setHoveredLink] = useState('');
   const [navHovering, setNavHovering] = useState(false);
 
@@ -13,7 +16,13 @@ const Header = () => {
       className="sticky z-10 flex items-center justify-between h-16"
     >
       <Link href="/">
-        <p className="text-4xl font-barlow">T&T</p>
+        <p
+          className={`${
+            scrollY === 0 ? 'opacity-0' : 'opacity-100'
+          } text-5xl tracking-[-.25rem] font-barlow`}
+        >
+          TT
+        </p>
       </Link>
       <motion.div
         layout
@@ -28,7 +37,17 @@ const Header = () => {
             className={`z-20 px-6 py-2 group`}
             onMouseEnter={() => setHoveredLink(link.name)}
           >
-            <p className="text-center">{link.name}</p>
+            <p className="font-medium text-center">{link.name}</p>
+            {pathname === link.active && (
+              <motion.span
+                layout
+                className={`fixed w-8 h-[2px] rounded-full bg-dark ${
+                  pathname === '/' ? 'translate-x-1/3' : ''
+                } ${pathname === '/gallery' ? 'translate-x-1/2' : ''} ${
+                  pathname === '/contact' ? 'translate-x-2/3' : ''
+                }`}
+              />
+            )}
           </Link>
         ))}
         <motion.div
