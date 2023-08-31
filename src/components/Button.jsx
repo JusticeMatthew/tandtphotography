@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { cva } from 'class-variance-authority';
 import { twMerge } from 'tw-merge';
 
@@ -11,10 +12,17 @@ const buttonVariants = cva('rounded-md py-4 px-8 shadow font-medium', {
   },
 });
 
-const Button = ({ className, children, variant, ...props }) => {
+const Button = ({ className, children, variant, path, ...props }) => {
+  const { push } = useRouter();
+
+  const handleClick = () => {
+    push(`/${path}`);
+  };
+
   return (
     <button
       {...props}
+      onClick={handleClick}
       className={twMerge(buttonVariants({ variant, className }))}
     >
       {children}

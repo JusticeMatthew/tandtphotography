@@ -1,13 +1,14 @@
 import Head from 'next/head';
-import Landing from '@/containers/Landing';
+import { Landing, Categories } from '@/containers';
 
 export default function Home() {
   return (
-    <div id="content">
+    <div>
       <Head>
         <title>T & T Photography</title>
       </Head>
       <Landing />
+      <Categories />
     </div>
   );
 }

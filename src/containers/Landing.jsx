@@ -4,12 +4,12 @@ import Button from '@/components/Button';
 
 const Landing = () => {
   return (
-    <section className="flex items-center w-full h-[80vh]">
+    <section id="content" className="flex items-center w-full min-h-[80vh]">
       <div className="relative z-10">
         <h1 className="mb-16 -translate-x-2 font-barlow text-9xl">
-          Capturing Natures Masterpieces
+          Capturing Nature&apos;s Masterpieces
         </h1>
-        <Button variant="glass" className="text-2xl">
+        <Button variant="glass" path="gallery" className="text-2xl">
           View gallery
         </Button>
       </div>
