@@ -4,22 +4,22 @@ import Button from '@/components/Button';
 
 const Landing = () => {
   return (
-    <section id="content" className="flex items-center w-full min-h-[80vh]">
+    <section id="content" className="flex items-center w-full min-h-screen">
       <div className="relative z-10">
-        <h1 className="mb-16 -translate-x-2 font-barlow text-9xl">
+        <h1 className="mb-16 -translate-x-[6px] font-barlow text-9xl">
           Capturing Nature&apos;s Masterpieces
         </h1>
-        <Button variant="glass" path="gallery" className="text-2xl">
+        <Button variant="glass" path="gallery" className="text-2xl mb-[33rem]">
           View gallery
         </Button>
       </div>
       {/* BACKGROUND IMAGE */}
-      <div className="absolute top-0 left-0 z-0 w-screen h-screen">
+      <div className="fixed top-0 left-0 z-0 w-screen h-screen">
         <Image
-          src="/images/TTheroimage.webp"
+          src="/images/landing-page-bg.webp"
           alt="mountains"
           fill
-          className="object-cover"
+          className="fixed object-cover"
         />
       </div>
       {/* BACKGROUND IMAGE END */}

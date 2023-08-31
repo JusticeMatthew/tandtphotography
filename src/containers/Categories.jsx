@@ -4,14 +4,9 @@ import { largeCategories } from '@/constants/largeCategories';
 
 const Categories = () => {
   return (
-    <section className="relative mt-[15vh]">
-      {largeCategories.map((category) => (
-        <LargeCategoryLink
-          key={category}
-          title={category.title}
-          src={category.src}
-          alt={category.alt}
-        />
+    <section className="relative h-screen">
+      {largeCategories.map(({ title, src, alt }) => (
+        <LargeCategoryLink key={title} title={title} src={src} alt={alt} />
       ))}
     </section>
   );

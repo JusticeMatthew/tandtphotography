@@ -6,7 +6,7 @@ import { twMerge } from 'tw-merge';
 const buttonVariants = cva('rounded-md py-4 px-8 shadow font-medium', {
   variants: {
     variant: {
-      glass: 'bg-glass/30 backdrop-blur-sm hover:bg-glass/60',
+      glass: 'bg-glass/30 backdrop-blur-md hover:bg-glass/60',
       white: 'bg-light',
     },
   },

@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { navLinks } from '@/constants/navLinks';
 
 const Header = () => {
-  const { pathname } = useRouter();
+  const { route } = useRouter();
   const { scrollY } = useScroll();
+  const [scrollPosition, setScrollPosition] = useState(0);
   const [hoveredLink, setHoveredLink] = useState('');
   const [navHovering, setNavHovering] = useState(false);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setScrollPosition(latest);
+  });
 
   return (
     <div
       id="header"
-      className="sticky z-10 flex items-center justify-between h-16"
+      className="sticky top-0 z-50 flex items-center justify-between h-16"
     >
       <Link href="/">
         <p
           className={`${
-            scrollY === 0 ? 'opacity-0' : 'opacity-100'
-          } text-5xl tracking-[-.25rem] font-barlow`}
+            scrollPosition === 0 ? 'opacity-100' : 'opacity-0'
+          } text-5xl tracking-[-.25rem] font-barlow -translate-x-[2px]`}
         >
           TT
         </p>
       </Link>
       <motion.div
         layout
-        className="relative flex items-center justify-center rounded-md shadow bg-glass/30 backdrop-blur-lg"
+        className="relative flex items-center justify-center rounded-md shadow bg-glass/30 backdrop-blur"
         onHoverStart={() => setNavHovering(true)}
         onHoverEnd={() => setNavHovering(false)}
       >
         {navLinks.map((link) => (
           <Link
-            href={link.path}
+            href={link.route}
             key={link.name}
-            className={`z-20 px-6 py-2 group`}
+            className="z-20 px-6 py-2 group"
             onMouseEnter={() => setHoveredLink(link.name)}
           >
             <p className="font-medium text-center">{link.name}</p>
-            {pathname === link.active && (
+            {route === link.active && (
               <motion.span
                 layout
-                className={`fixed w-8 h-[2px] rounded-full bg-dark ${
-                  pathname === '/' ? 'translate-x-1/3' : ''
-                } ${pathname === '/gallery' ? 'translate-x-1/2' : ''} ${
-                  pathname === '/contact' ? 'translate-x-2/3' : ''
-                }`}
+                className="fixed w-[13px] h-[2px] rounded-full bg-dark -mt-[2px] ml-[.5px]"
               />
             )}
           </Link>
